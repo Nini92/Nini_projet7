@@ -1,9 +1,9 @@
-name: CI/CD Pipeline
+name: CI
 
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   build:
@@ -11,22 +11,15 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3  # Mise à jour de v2 à v3
 
     - name: Set up Node.js
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3  # Mise à jour de v2 à v3
       with:
-        node-version: '14'
+        node-version: '18'  # Utilisation de Node.js 18
 
     - name: Install dependencies
       run: npm install
 
     - name: Run tests
       run: npm test
-
-    - name: Build project
-      run: npm run build
-
-    - name: Deploy to server
-      run: |
-        scp -r ./build user@yourserver.com:/path/to/deploy
